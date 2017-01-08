@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.glarimy.com/library"
+	xmlns:abc="http://www.glarimy.com/library" elementFormDefault="qualified">
+	<element name="isbn" type="int" />
+	<element name="title" type='string' />
+	<element name="available" type='boolean' />
+	<element name="price" type='double' />
+	<element name="name" type='string' />
+	<element name="email" type='string' />
+	<element name="phoneNumber" type='long' />
+	<element name="publisher">
+		<complexType>
+			<sequence>
+				<element ref='abc:name' />
+				<element ref="abc:phoneNumber" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="author">
+		<complexType>
+			<sequence>
+				<element ref='abc:name' />
+				<element ref="abc:email" />
+			</sequence>
+		</complexType>
+	</element>
+	<element name="book">
+		<complexType>
+			<sequence>
+				<element ref="abc:isbn" />
+				<element ref="abc:title" />
+				<element ref="abc:price" />
+				<element ref="abc:available" />
+				<element ref="abc:publisher" />
+				<element ref="abc:author" maxOccurs="unbounded" />
+			</sequence>
+		</complexType>
+	</element>
+</schema>

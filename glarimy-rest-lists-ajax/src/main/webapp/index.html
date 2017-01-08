@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Glarimy Library</title>
+<script type="text/javascript">
+	function search() {
+		var xhr = new XMLHttpRequest();
+		var isbn = document.getElementById('isbn').value;
+		xhr.open("get", "http://localhost:8080/jaxrs/glarimy/lib/book/" + isbn,
+				true);
+		xhr.setRequestHeader("Accept", "application/json");
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var book = JSON.parse(xhr.responseText);
+				console.log(book.title);
+				console.log(book.publisher.name);
+				console.log(book.author[0].email);
+				var html = "";
+				html += "<span>" + book.title + "</span>";
+				html += "<span>" + book.publisher.name + "</span>";
+				html += "<span>" + book.author[0].email + "</span>";
+
+				document.getElementById('results').innerHTML = html;
+			}
+		}
+		xhr.send();
+	}
+</script>
+</head>
+<body>
+	<h1>Glarimy Library</h1>
+	<hr />
+	<table>
+		<tr>
+			<td>Enter ISBN</td>
+			<td><input id="isbn"></td>
+			<td><button onclick='search()'>Search</button></td>
+		</tr>
+	</table>
+	<h2>Search Results</h2>
+	<div id='results'></div>
+</body>
+</html>

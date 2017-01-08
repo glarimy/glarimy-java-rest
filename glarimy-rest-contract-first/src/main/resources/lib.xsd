@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.glarimy.com/lib/api"
+	xmlns:gl="http://www.glarimy.com/lib/api" elementFormDefault="qualified">
+	<complexType name='author'>
+		<sequence>
+			<element name="name" type='string' />
+			<element name="email" type='string' />
+		</sequence>
+	</complexType>
+	<complexType name="book">
+		<sequence>
+			<element name="title" type='string' />
+			<element name='isbn' type='int' />
+			<element name="author" type='gl:author' />
+		</sequence>
+	</complexType>
+</schema>

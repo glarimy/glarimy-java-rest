@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>Glarimy Library</title>
+<script>
+	function find() {
+		var isbn = document.getElementById('isbn').value;
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "online/book/" + isbn, true);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var book = JSON.parse(xhr.responseText);
+				document.getElementById('title').value = book.title;
+				document.getElementById('price').value = book.price;
+			}
+		};
+		xhr.send();
+		return false;
+	}
+	function update() {
+		var isbn = document.getElementById('isbn').value;
+		var price = document.getElementById('price').value;
+		var xhr = new XMLHttpRequest();
+		xhr.open("post", "online/book/", true);
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				console.log("Done!");
+			}
+		};
+		xhr.send("isbn=" + isbn + "&price=" + price);
+		return false;
+	}
+</script>
+</head>
+<body>
+	<h1>Glarimy Library</h1>
+	<form>
+		Find Book by ISBN <input id='isbn'>
+		<button onClick='return find()'>Find</button>
+	</form>
+	<form>
+		<table>
+			<tr>
+				<td>Title</td>
+				<td><input id='title' disabled="disabled"></td>
+			</tr>
+			<tr>
+				<td>Price</td>
+				<td><input id='price'></td>
+			</tr>
+			<tr>
+				<td colspan='2'><button onClick='return update()'>Update</button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
